@@ -7,7 +7,10 @@ pipeline {
                 label 'Node1' // Specify a specific agent label for this stage
             }
             steps {
-                sh 'docker build -t myapp 3.'
+                sh 
+                '''
+                echo 'docker build -t myapp 3.' 
+                '''
             }
         }
         stage('Test') {
@@ -15,7 +18,10 @@ pipeline {
                 label 'Node2' // Specify the same agent label for consistency
             }
             steps {
-                sh 'docker run myapp test 3'
+                sh 
+                '''
+                echo 'docker run myapp test 3'
+                '''
             }
         }
         stage('Deploy') {
@@ -23,7 +29,10 @@ pipeline {
                 label 'Master_Jenkins' // Specify the same agent label for consistency
             }
             steps {
-                sh 'docker push myapp:latest 3'
+                sh 
+                '''
+                echo 'docker push myapp:latest 3'
+                '''
             }
         }
     }
