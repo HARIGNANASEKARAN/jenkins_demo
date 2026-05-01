@@ -9,4 +9,21 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            echo 'This will always run (success or failure) 2'
+        }
+        success {
+            echo 'Build succeeded 2 '
+        }
+        failure {
+            echo 'Build failed  2 '
+        }
+        unstable {
+            echo 'Build is unstable  2'
+        }
+        changed {
+            echo 'Build status changed from last run 2'
+        }
+    }
 }
