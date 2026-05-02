@@ -4,7 +4,7 @@ pipeline {
         APP = 'frontend'
         DB_URL = '192.168.28.24'
         BRANCH = 'main'
-        GIT_URL = 'https://github.com/HARIGNANASEKARAN/jenkins_demo/tree/main.git'
+        GIT_URL = 'https://github.com/HARIGNANASEKARAN/jenkins_demo.git'
         CRED_ID = 'github_hp'
     }
     stages {
