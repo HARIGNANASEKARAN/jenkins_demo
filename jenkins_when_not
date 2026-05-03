@@ -11,9 +11,8 @@ pipeline {
 
         stage('Deploy to Dev') {
             when {
-                not {
-                    branch 'main'
-                }
+                branch: 'main'
+                
             }
             steps {
                 echo "Deploying to DEV environment..."
@@ -22,7 +21,7 @@ pipeline {
 
         stage('Deploy to Prod') {
             when {
-                branch 'main'
+                branch: 'main'
             }
             steps {
                 echo "Deploying to PRODUCTION..."
