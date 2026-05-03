@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NAME', defaultValue: 'User', description: 'Enter your name')
+        choice(name: 'ENV', choices: ['dev', 'test', 'prod'], description: 'Select environment')
+        booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy application?')
+        password(name: 'PASS', defaultValue: '', description: 'Enter password')
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo "Hello ${params.NAME}"
+                echo "Environment: ${params.ENV}"
+            }
+        }
+
+        stage('Deploy') {
+            when {
+                expression { params.DEPLOY == true }
+            }
+            steps {
+                echo "Deploying to ${params.ENV}"
+            }
+        }
+    }
+}
