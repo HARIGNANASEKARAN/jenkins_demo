@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Test') {
+            steps {
+                script {
+                    try {
+                        sh 'exit 1'   // Simulate failure
+                    } catch (Exception e) {
+                        echo "Test failed, but handled using try-catch"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
+            }
+        }
+    }
+}
