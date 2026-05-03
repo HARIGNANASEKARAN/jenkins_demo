@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building application..."
+            }
+        }
+
+        stage('Deploy to Dev') {
+            when {
+                not {
+                    branch 'main'
+                }
+            }
+            steps {
+                echo "Deploying to DEV environment..."
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo "Deploying to PRODUCTION..."
+            }
+        }
+    }
+}
