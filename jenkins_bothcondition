@@ -4,7 +4,6 @@ pipeline {
     environment {
         DEPLOY_ENV = 'prod'
         APPROVED   = 'true'
-        branch = 'main'
     }
 
     stages {
@@ -18,7 +17,7 @@ pipeline {
         stage('Deploy to Prod') {
             when {
                 allOf {
-                    branch 'main'
+                    environment name: 'branch', value: 'main'
                     environment name: 'DEPLOY_ENV', value: 'prod'
                 }
             }
