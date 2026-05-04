@@ -30,8 +30,8 @@ pipeline {
         stage('Deploy to Dev or QA') {
             when {
                 anyOf {
-                    branch 'develop'
-                    branch 'main'
+                    environment name: 'branch', value: 'develop'
+                    environment name: 'branch', value: 'main'
                 }
             }
             steps {
