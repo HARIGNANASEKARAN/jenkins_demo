@@ -1,0 +1,56 @@
+pipeline {
+    agent any
+
+    environment {
+        DEPLOY_ENV = 'prod'
+        APPROVED   = 'true'
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building application..."
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when {
+                allOf {
+                    branch 'main'
+                    environment name: 'DEPLOY_ENV', value: 'prod'
+                }
+            }
+            steps {
+                echo "Deploying to Production..."
+            }
+        }
+
+        stage('Deploy to Dev or QA') {
+            when {
+                anyOf {
+                    branch 'develop'
+                    branch 'qa'
+                }
+            }
+            steps {
+                echo "Deploying to Dev or QA..."
+            }
+        }
+
+        stage('Complex Condition') {
+            when {
+                allOf {
+                    anyOf {
+                        branch 'main'
+                        branch 'release'
+                    }
+                    environment name: 'APPROVED', value: 'true'
+                }
+            }
+            steps {
+                echo "Running complex stage..."
+            }
+        }
+    }
+}
