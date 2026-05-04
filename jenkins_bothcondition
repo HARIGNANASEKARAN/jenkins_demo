@@ -4,6 +4,7 @@ pipeline {
     environment {
         DEPLOY_ENV = 'prod'
         APPROVED   = 'true'
+        branch = 'main'
     }
 
     stages {
