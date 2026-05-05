@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    options {
+        // Timeout for entire pipeline
+        timeout(time: 1, unit: 'HOURS')
+
+        // Keep only last 10 builds
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+
+        // Do not allow concurrent runs
+        disableConcurrentBuilds()
+
+        // Retry the whole pipeline 4 times if it fails
+        retry(4)
+    }
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo "Building application..."
+                sh 'sleep 5'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Running tests..."
+                sh 'sleep 5'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application..."
+                sh 'sleep 5'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline executed successfully!"
+        }
+        failure {
+            echo "Pipeline failed after retries!"
+        }
+    }
+}
